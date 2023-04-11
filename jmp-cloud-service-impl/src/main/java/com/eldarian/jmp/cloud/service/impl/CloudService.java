@@ -5,22 +5,31 @@ import com.eldarian.jmp.dto.Subscribtion;
 import com.eldarian.jmp.dto.User;
 import com.eldarian.jmp.service.api.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.time.LocalDate;
+import java.util.*;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 public class CloudService implements Service {
+    Map<User, List<Subscribtion>> userSubscribtions  = new HashMap<>();
+
     @Override
     public void subscribe(BankCard bankCard) {
-
+        User user = bankCard.getUser();
+        Subscribtion subscribtion = new Subscribtion(bankCard.getNumber(), LocalDate.now());
+        Objects.requireNonNull(userSubscribtions.putIfAbsent(user, new ArrayList<>())).add(subscribtion);
     }
 
     @Override
     public Optional<Subscribtion> getSubscribtionByCardNumber(String cardNumber) {
-        return Optional.empty();
+        return userSubscribtions.values().stream()
+                .flatMap(Collection::parallelStream)
+                .filter(subscribtion -> subscribtion.getBankCardNumber().equals(cardNumber))
+                .findFirst();
     }
 
     @Override
     public List<User> getAllUsers() {
-        return null;
+        return userSubscribtions.keySet().stream().collect(Collectors.toList());
     }
 }

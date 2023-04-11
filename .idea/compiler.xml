@@ -9,6 +9,7 @@
         <module name="jmp-service-api" />
         <module name="jmp-dto" />
         <module name="jmp-cloud-bank-impl" />
+        <module name="jmp-app" />
         <module name="jmp-bank-api" />
         <module name="jmp-cloud-service-impl" />
       </profile>

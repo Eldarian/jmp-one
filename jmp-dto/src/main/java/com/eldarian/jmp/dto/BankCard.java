@@ -1,7 +1,15 @@
 package com.eldarian.jmp.dto;
 
+import java.util.Random;
+
 public abstract class BankCard {
     private String number;
+    private User user;
+
+    public BankCard(User user) {
+        this.user = user;
+        number = String.valueOf(new Random().nextInt());
+    }
 
     public String getNumber() {
         return number;
@@ -19,5 +27,11 @@ public abstract class BankCard {
         this.user = user;
     }
 
-    private User user;
+    @Override
+    public String toString() {
+        return "BankCard{" +
+                "number='" + number + '\'' +
+                ", user=" + user +
+                '}';
+    }
 }
