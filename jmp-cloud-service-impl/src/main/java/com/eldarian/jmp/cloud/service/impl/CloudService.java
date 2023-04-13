@@ -17,7 +17,7 @@ public class CloudService implements Service {
     public void subscribe(BankCard bankCard) {
         User user = bankCard.getUser();
         Subscribtion subscribtion = new Subscribtion(bankCard.getNumber(), LocalDate.now());
-        Objects.requireNonNull(userSubscribtions.putIfAbsent(user, new ArrayList<>())).add(subscribtion);
+        userSubscribtions.computeIfAbsent(user, u -> new ArrayList<>()).add(subscribtion);
     }
 
     @Override

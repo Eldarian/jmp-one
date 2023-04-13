@@ -2,9 +2,11 @@ package com.eldarian.jmp.app;
 
 import com.eldarian.jmp.bank.api.Bank;
 import com.eldarian.jmp.cloud.bank.impl.CloudBankImpl;
+import com.eldarian.jmp.cloud.service.impl.CloudService;
 import com.eldarian.jmp.dto.BankCard;
 import com.eldarian.jmp.dto.BankCardType;
 import com.eldarian.jmp.dto.User;
+import com.eldarian.jmp.service.api.Service;
 
 import java.time.LocalDate;
 
@@ -13,9 +15,17 @@ import java.time.LocalDate;
 public class Main {
     public static void main(String[] args) {
         Bank cloudBank = new CloudBankImpl();
+        Service service = new CloudService();
+
         User user1 = new User("John", "Wick", LocalDate.of(1973, 12, 4));
+        User user2 = new User("Jim", "Hockings", LocalDate.of(1999, 4, 13));
+
+
+
         BankCard card1 = cloudBank.createBankCard(user1, BankCardType.DEBIT);
+        service.subscribe(card1);
         System.out.println(card1.toString());
+        System.out.println(service.getAllUsers());
 
 
     }
