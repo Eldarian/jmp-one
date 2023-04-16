@@ -6,12 +6,18 @@ import com.eldarian.jmp.dto.*;
 public class CloudBankImpl implements Bank {
     @Override
     public BankCard createBankCard(User user, BankCardType bankCardType) {
+        return switch (bankCardType) {
 
-        // TODO: 10/04/2023 Replace with java8 style code
-        switch (bankCardType) {
-            case CREDIT: return new CreditBankCard(user);
-            case DEBIT: return new DebitBankCard(user);
-            default: return null;
-        }
+            case CREDIT -> { BankCardFactory factory = CreditBankCard::new;
+                            yield factory.create(user);
+            }
+            case DEBIT -> { BankCardFactory factory = DebitBankCard::new;
+                    yield factory.create(user);}
+        };
+    }
+
+    @FunctionalInterface
+    interface BankCardFactory {
+        BankCard create(User user);
     }
 }

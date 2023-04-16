@@ -27,4 +27,11 @@ public class Subscription {
         this.startDate = startDate;
     }
 
+    @Override
+    public String toString() {
+        return "Subscription{" +
+                "bankCardNumber='" + bankCardNumber + '\'' +
+                ", startDate=" + startDate +
+                '}';
+    }
 }

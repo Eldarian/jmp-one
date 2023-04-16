@@ -10,8 +10,6 @@ import com.eldarian.jmp.service.api.Service;
 
 import java.time.LocalDate;
 
-// Press ⇧ twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
         Bank cloudBank = new CloudBankImpl();
@@ -35,6 +33,9 @@ public class Main {
         System.out.println(card1.toString());
         System.out.println(service.getAllUsers());
         System.out.println(service.getAverageUsersAge());
+        System.out.println(service.getAllSubscriptionsByCondition(
+                subscription ->
+                        subscription.getStartDate().isAfter(LocalDate.of(2020, 1, 1))));
 
 
     }

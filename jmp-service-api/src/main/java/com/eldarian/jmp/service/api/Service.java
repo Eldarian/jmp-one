@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 public interface Service {
     static boolean isPayableUser(User user) {
@@ -16,6 +17,8 @@ public interface Service {
     void subscribe(BankCard bankCard);
     Optional<Subscription> getSubscriptionByCardNumber(String cardNumber) throws NoSubscriptionException;
     List<User> getAllUsers();
+
+    List<Subscription> getAllSubscriptionsByCondition(Predicate<Subscription> subscriptionPredicate);
 
     default double getAverageUsersAge() {
         return getAllUsers().stream()

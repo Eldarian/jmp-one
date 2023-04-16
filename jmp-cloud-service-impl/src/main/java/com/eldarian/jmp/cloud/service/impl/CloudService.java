@@ -8,6 +8,7 @@ import com.eldarian.jmp.service.api.Service;
 
 import java.time.LocalDate;
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class CloudService implements Service {
@@ -36,5 +37,14 @@ public class CloudService implements Service {
     @Override
     public List<User> getAllUsers() {
         return userSubscribtions.keySet().stream().collect(Collectors.toUnmodifiableList());
+    }
+
+    @Override
+    public List<Subscription> getAllSubscriptionsByCondition(Predicate<Subscription> subscriptionPredicate) {
+        return userSubscribtions.values()
+                .stream()
+                .flatMap(Collection::parallelStream)
+                .filter(subscriptionPredicate)
+                .collect(Collectors.toList());
     }
 }
