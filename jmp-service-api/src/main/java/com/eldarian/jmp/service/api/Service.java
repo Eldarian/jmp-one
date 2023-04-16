@@ -1,7 +1,7 @@
 package com.eldarian.jmp.service.api;
 
 import com.eldarian.jmp.dto.BankCard;
-import com.eldarian.jmp.dto.Subscribtion;
+import com.eldarian.jmp.dto.Subscription;
 import com.eldarian.jmp.dto.User;
 
 import java.time.LocalDate;
@@ -10,8 +10,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface Service {
+    static boolean isPayableUser(User user) {
+        return Period.between(user.getBirthday(), LocalDate.now()).getYears() >= 18;
+    }
     void subscribe(BankCard bankCard);
-    Optional<Subscribtion> getSubscribtionByCardNumber(String cardNumber);
+    Optional<Subscription> getSubscriptionByCardNumber(String cardNumber) throws NoSubscriptionException;
     List<User> getAllUsers();
 
     default double getAverageUsersAge() {

@@ -2,11 +2,11 @@ package com.eldarian.jmp.dto;
 
 import java.time.LocalDate;
 
-public class Subscribtion {
+public class Subscription {
     private String bankCardNumber;
     private LocalDate startDate;
 
-    public Subscribtion(String bankCardNumber, LocalDate startDate) {
+    public Subscription(String bankCardNumber, LocalDate startDate) {
         this.bankCardNumber = bankCardNumber;
         this.startDate = startDate;
     }
