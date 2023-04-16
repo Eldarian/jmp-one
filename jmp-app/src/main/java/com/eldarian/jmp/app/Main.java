@@ -23,9 +23,16 @@ public class Main {
 
 
         BankCard card1 = cloudBank.createBankCard(user1, BankCardType.DEBIT);
+        BankCard card2 = cloudBank.createBankCard(user2, BankCardType.CREDIT);
+        BankCard card3 = cloudBank.createBankCard(user1, BankCardType.CREDIT);
+
         service.subscribe(card1);
+        service.subscribe(card2);
+        service.subscribe(card3);
+
         System.out.println(card1.toString());
         System.out.println(service.getAllUsers());
+        System.out.println(service.getAverageUsersAge());
 
 
     }
